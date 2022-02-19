@@ -1,0 +1,73 @@
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker version
+Client:
+ Version:           20.10.7
+ API version:       1.41
+ Go version:        go1.13.8
+ Git commit:        20.10.7-0ubuntu5.1
+ Built:             Mon Nov  1 00:33:40 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server:
+ Engine:
+  Version:          20.10.7
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.8
+  Git commit:       20.10.7-0ubuntu5.1
+  Built:            Thu Oct 21 23:58:58 2021
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.5.5-0ubuntu3
+  GitCommit:        
+ runc:
+  Version:          1.0.1-0ubuntu2
+  GitCommit:        
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker pull mariadb
+Using default tag: latest
+latest: Pulling from library/mariadb
+Digest: sha256:ca31f38b6e325ece985d857db7eba1fe59928b4fd83ff8a55cb912c9684b9e43
+Status: Image is up to date for mariadb:latest
+docker.io/library/mariadb:latest
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+mariadb       latest    45a5a43e143a   2 weeks ago    410MB
+hello-world   latest    feb5d9fea6a5   4 months ago   13.3kB
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo mkdir ~/wordpress
+mkdir: cannot create directory ‘/home/lenovo/wordpress’: File exists
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo mkdir -p ~/wordpress/database
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo mkdir -p ~/wordpress/html 
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker run -e MYSQL_ROOT_PASSWORD=admin@123 -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=wpuser@ -e MYSQL_DATABASE=wordpress_db -v/root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb
+docker: Error response from daemon: Conflict. The container name "/wordpressdb" is already in use by container "0dfb71a49b882c97b6bd8813a9ab06be389bfc2d173cebebc935e6311e023e4b". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+lenovo@lenovo-VirtualBox:~/Desktop$ sudo docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS      NAMES
+0dfb71a49b88   mariadb   "docker-entrypoint.s…"   16 minutes ago   Up 16 minutes   3306/tcp   wordpressdb
+lenovo@lenovo-VirtualBox:~/Desktop$ 
